@@ -36,3 +36,9 @@ IActionResult Interface returns
 + .NET Core SDK
 (Install the .Net Core SDK)
 
+--Remember to select ASP.NET core additional install package--
+Install and use the latest .NET CORE SDK
+
+#3 - Creating asp net core web application
+To create a ASP.NET Core project 
+File->New->ASP.NET CORE->...
