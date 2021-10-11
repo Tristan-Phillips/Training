@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1633965001 source:d:\tteq projects\github\training\cpp\bank management system\bms\main.cpp
+	"account.h"
+
+1633964999 d:\tteq projects\github\training\cpp\bank management system\bms\include\account.h
+	<iostream>
+	<fstream>
+	<cctype>
+	<iomanip>
+
+1633965027 source:d:\tteq projects\github\training\cpp\bank management system\bms\src\account.cpp
+	"account.h"
+
