@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include <QTime>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -30,33 +31,31 @@ void Widget::updateClickCount()
     this->ui->lcdNumber_totalClicks->display(currentCount);
 }
 
-void Widget::updateImage(int headOrTailResult)
+void Widget::setupTextEdit(int headOrTail)
 {
-    QGraphicsScene *sceneCoin = new QGraphicsScene;
-    QString workingPath = QApplication::applicationDirPath();
-
-    if(headOrTailResult == 0){
-        workingPath = workingPath.append("/head.jpg");
-    }else{
-        workingPath = workingPath.append("/tail.jpg");
+    this->ui->textEdit_image->clear();
+    //Add blink effect
+    QTime blinkTime = QTime::currentTime().addMSecs(200); //Magic Number
+    while(QTime::currentTime() < blinkTime){
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
     }
-    QPixmap pixmap(workingPath);
-    sceneCoin->addPixmap(pixmap);
-    this->ui->graphicsView_coin->setScene(sceneCoin);
-    this->ui->graphicsView_coin->show();
-}
+    //Fancy Text Setup
+    this->ui->textEdit_image->setFont(QFont("Black body", 74));
+    //this->ui->textEdit_image->setAlignment(Qt::AlignCenter);
 
+    //0 = head ; 1 = tails
+    if(headOrTail == 0){
+        this->ui->textEdit_image->setText("HEADS");
+    }else{
+        this->ui->textEdit_image->setText("TAILS");
+    }
+}
 
 void Widget::on_pushButton_clickToFlip_clicked()
 {
     updateClickCount();
     //0 = Heads ; 1 = Tails
     int generatedInt = generateOneOrZero();
-    if(generatedInt == 0){
-        this->ui->label_lastResult->setText("Last Result: Heads");
-    }else{
-        this->ui->label_lastResult->setText("Last Result: Tails");
-    }
-    updateImage(generatedInt);
+    setupTextEdit(generatedInt);
 }
 

@@ -17,7 +17,7 @@ public:
 
     int generateOneOrZero();
     void updateClickCount();
-    void updateImage(int headOrTailResult);
+    void setupTextEdit(int headOrTail);
 
 private slots:
     void on_pushButton_clickToFlip_clicked();
