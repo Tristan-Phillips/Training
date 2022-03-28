@@ -42,3 +42,27 @@ Install and use the latest .NET CORE SDK
 #3 - Creating asp net core web application
 To create a ASP.NET Core project
 File->New->ASP.NET CORE->...
+
+#4 - ASP NET core project file
+File Extensions:
+• .csproj
+• .vbproj
+
+--Unload the project--
+
+You must add the item you want to reference (File / Folder)
+You must add through VS Solution explorer?
+
+TFM - Target Framework Moniker --- Used to specify a target framework
+
+Name= .net core ; Abbreviation= netcoreapp ; TFM= (netcoreapp1.0~)
+
+ASPNetCoreHostingModel = In or out process
+--InProcess hosts the app inside of the IIS worker process
+--OutOfProcess hosting model forwards web requests to a backend ASP.NET core app running on a Kestrel server
+(Out of process is default)
+
+PackageReference
+MetaPackage = only contains a list of dependencies (other packages)
+Without a version number it will be implicitly supplied by the SDK
+
