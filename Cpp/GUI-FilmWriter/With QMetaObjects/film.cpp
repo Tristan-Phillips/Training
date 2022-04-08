@@ -1,58 +1,58 @@
 #include "film.h"
 
-Film::Film(QString title, QString director, int duration, QDate releaseDate)
+Film::Film(QString t, QString d, int du, QDate rd)
 {
-    m_title = title;
-    m_director = director;
-    m_duration = duration;
-    m_releaseDate = releaseDate;
-}
-
-QString Film::toString()
-{
-    return QString("Title: %1, Director: %2, Duration: %3, Release Date: %4")
-            .arg(m_title)
-            .arg(m_director)
-            .arg(m_duration)
-            .arg(m_releaseDate.toString("dd-MM-yyyy"));
+    title = t;
+    director = d;
+    duration = du;
+    releaseDate = rd;
 }
 
 QString Film::get_title() const
 {
-    return m_title;
+    return title;
 }
 
 QString Film::get_director() const
 {
-    return m_director;
+    return director;
 }
 
 int Film::get_duration() const
 {
-    return m_duration;
+    return duration;
 }
 
 QDate Film::get_releaseDate() const
 {
-    return m_releaseDate;
+    return releaseDate;
 }
 
 void Film::set_title(QString title)
 {
-    m_title = title;
+    title = title;
 }
 
 void Film::set_director(QString director)
 {
-    m_director = director;
+    director = director;
 }
 
 void Film::set_duration(int duration)
 {
-    m_duration = duration;
+    duration = duration;
 }
 
 void Film::set_releaseDate(QDate releaseDate)
 {
-    m_releaseDate = releaseDate;
+    releaseDate = releaseDate;
 }
+
+//QString Film::toString()
+//{
+//    return QString("Title: %1, Director: %2, Duration: %3, Release Date: %4")
+//            .arg(m_title)
+//            .arg(m_director)
+//            .arg(m_duration)
+//            .arg(m_releaseDate.toString("dd-MM-yyyy"));
+//}

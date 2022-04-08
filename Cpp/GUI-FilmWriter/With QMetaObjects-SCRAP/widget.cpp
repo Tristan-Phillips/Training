@@ -22,11 +22,11 @@ void FilmInput::on_pushButton_writeToFile_clicked()
     QDate releaseDate = QDate::currentDate();//ui->dateEdit_releaseDate->text();
 
     Film film(title, director, duration, releaseDate);
-    film.setProperty("title", title);
-    film.setProperty("director", director);
-    film.setProperty("duration", duration);
-    film.setProperty("releaseDate", releaseDate);
-
+    //Set Properties (Constructor^ doesnt need to take arg)
+    film.setProperty("m_title", title);
+    film.setProperty("m_director", director);
+    film.setProperty("m_duration", duration);
+    film.setProperty("m_releaseDate", releaseDate);
 
     FilmWriter writer("filmFile.txt");
     bool successfulWrite = writer.saveFilm(film);

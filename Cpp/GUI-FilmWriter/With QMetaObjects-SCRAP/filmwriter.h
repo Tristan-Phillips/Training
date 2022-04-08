@@ -2,6 +2,7 @@
 #define FILMWRITER_H
 #include <QFile>
 #include <QTextStream>
+#include <QMetaProperty>
 #include "film.h"
 
 class FilmWriter
