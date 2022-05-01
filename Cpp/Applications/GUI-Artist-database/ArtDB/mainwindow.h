@@ -7,6 +7,7 @@
 class QGraphicsView;
 class QTableWidget;
 class QLineEdit;
+class QPushButton;
 
 class MainWindow : public QMainWindow
 {
@@ -24,11 +25,17 @@ signals:
 
 public slots:
     void slot_rowSelected_displayName(int row, int column);
+    void slot_pushButton_viewFull();
 
 private:
     //Remove QListView *m_mainWindow_listView;
     QTableWidget *m_mainWindow_tableWidget;
     QGraphicsView *m_mainWindow_graphicsView;
     QLineEdit *m_mainWindow_lineEdit;
+    QPushButton *m_mainWindow_pushButtonViewFull;
+
+    //Table active row column
+    int m_tableWidget_activeRow;
+    int m_tableWidget_activeColumn;
 };
 #endif // MAINWINDOW_H

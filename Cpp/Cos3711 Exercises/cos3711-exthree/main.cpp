@@ -1,12 +1,12 @@
 #include <QApplication>
-#include "hello.h"
+#include "custview.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    Hello hi;
-    hi.show();
+    CustView view;
+    view.show();
 
     return a.exec();
 }

@@ -10,6 +10,7 @@
 #include <QMenuBar>
 #include <QToolBar>
 #include "tablewidget.h"
+#include "fullview.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupUI_mainWindow();
     setup_mainWindow_tableWidget();
     QObject::connect(this->m_mainWindow_tableWidget, SIGNAL(cellClicked(int,int)), this, SLOT(slot_rowSelected_displayName(int, int)));
+    QObject::connect(this->m_mainWindow_pushButtonViewFull, SIGNAL(clicked()), this, SLOT(slot_pushButton_viewFull()));
 }
 
 MainWindow::~MainWindow()
@@ -45,12 +47,16 @@ void MainWindow::setupUI_mainWindow()
     QHBoxLayout *firstLayer_hLayout = new QHBoxLayout;
     QVBoxLayout *firstLayer_vLayout = new QVBoxLayout;
 
+    //Passing to class member variable
+    //To Do Cleanup
+    m_mainWindow_pushButtonViewFull = pushButton_viewFull;
+
+
     //Rightside VLayout
     firstLayer_vLayout->addWidget(m_mainWindow_graphicsView);
     firstLayer_vLayout->addWidget(m_mainWindow_lineEdit);
     firstLayer_vLayout->addWidget(textBrowser_listViewSelected_shortHandMetaInfo);
     firstLayer_vLayout->addWidget(pushButton_viewFull);
-
 
     //Leftside HLayout
     firstLayer_hLayout->addWidget(m_mainWindow_tableWidget);
@@ -74,7 +80,20 @@ void MainWindow::setup_mainWindow_tableWidget()
 
 void MainWindow::slot_rowSelected_displayName(int row, int column)
 {
+    //Sets active selection to be known by other functions
+    m_tableWidget_activeRow = row;
+    m_tableWidget_activeColumn = column;
+
     //0 = column because location of Name text
     QTableWidgetItem *item = this->m_mainWindow_tableWidget->item(row,0);
     this->m_mainWindow_lineEdit->setText(item->text());
+}
+
+void MainWindow::slot_pushButton_viewFull()
+{
+    QTableWidget *widget = m_mainWindow_tableWidget;
+    int row = m_tableWidget_activeRow;
+    int column = m_tableWidget_activeColumn;
+
+    FullView obj(this, widget, row, column);
 }
