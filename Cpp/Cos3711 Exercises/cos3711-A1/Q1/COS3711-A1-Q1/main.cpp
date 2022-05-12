@@ -1,12 +1,11 @@
+#include "filminput.h"
+
 #include <QApplication>
-#include "custview.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-    CustView view;
-    view.show();
-
+    FilmInput w;
+    w.show();
     return a.exec();
 }
