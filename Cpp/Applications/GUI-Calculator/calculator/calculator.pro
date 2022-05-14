@@ -10,17 +10,15 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp \
-    setupui.cpp
+    calculator.cpp
 
 HEADERS += \
-    mainwindow.h \
-    setupui.h
+    calculator.h
+
+FORMS += \
+    calculator.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-DISTFILES += \
-    resources/image/logo.png
