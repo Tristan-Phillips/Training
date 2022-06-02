@@ -1,6 +1,6 @@
 #include "listreader.h"
 #include "filereader.h"
-#include "customerlistC.h"
+#include "customer.h"
 #include <QStringList>
 #include <QString>
 #include <QVariant>
@@ -11,14 +11,14 @@ ListReader::ListReader()
 {
 }
 
-CustomerList* ListReader::read(QString fileName) const
+QList<Customer*> ListReader::read(QString fileName) const
 {
     // Read Customer data from file
     FileReader fr(fileName);
     QString inStr(fr.read().trimmed());
 
-    // Instantiate and populate CustomerList object
-    CustomerList *cl(new CustomerList);
+    // Instantiate and populate customer list
+    QList<Customer*> cl;
 
     // Split input string into separate lines
     QStringList inData(inStr.split("\n"));
@@ -47,7 +47,7 @@ CustomerList* ListReader::read(QString fileName) const
                                     line.at(4),
                                     line.at(5).toDouble()));
 */
-        cl->append(cust);
+        cl.append(cust);
     }
 
     return cl;

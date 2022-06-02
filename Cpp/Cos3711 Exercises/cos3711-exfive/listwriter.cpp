@@ -1,16 +1,36 @@
 #include "listwriter.h"
 #include "filewriter.h"
-#include "customerlistC.h"
 #include <QMetaProperty>
 #include <QDebug>
 
-ListWriter::ListWriter(CustomerList *cl)
-    : list(cl)
+ListWriter::ListWriter(CustomerTableModel *model)
+    : ctm(model)
 {
 }
 
 bool ListWriter::write(QString fileName)
 {
+    QString address, outStr;
+
+    // Using model
+    for (int row = 0; row < ctm->rowCount(QModelIndex()); row++) {
+
+        address = QString("%1*%2*%3*%4")
+                .arg(ctm->data(ctm->index(row,2), Qt::DisplayRole).toString())
+                .arg(ctm->data(ctm->index(row,3), Qt::DisplayRole).toString())
+                .arg(ctm->data(ctm->index(row,4), Qt::DisplayRole).toString())
+                .arg(ctm->data(ctm->index(row,5), Qt::DisplayRole).toString());
+
+        outStr.append(QString("%1#%2#%3#%4#%5#%6\n")
+                      .arg(ctm->data(ctm->index(row,0), Qt::DisplayRole).toString())
+                      .arg(ctm->data(ctm->index(row,1), Qt::DisplayRole).toString())
+                      .arg(address)
+                      .arg(ctm->data(ctm->index(row,6), Qt::DisplayRole).toString())
+                      .arg(ctm->data(ctm->index(row,7), Qt::DisplayRole).toString())
+                      .arg(ctm->data(ctm->index(row,8), Qt::DisplayRole).toDouble()));
+    }
+
+/*
     QString outStr, lineStr, valStr;
 
     // Using QMetaObject
@@ -47,7 +67,7 @@ bool ListWriter::write(QString fileName)
 
         outStr.append(lineStr);
     }
-
+*/
 /*  // Using getters()
     foreach(Customer *cust, list->getList()) {
         outStr.append(QString("%1#%2#%3#%4#%5#%6\n")

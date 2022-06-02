@@ -4,7 +4,8 @@
 #include <QWidget>
 class CustomerList;
 class QPushButton;
-class QTextEdit;
+class QTableView;
+class CustomerTableModel;
 
 class CustView : public QWidget
 {
@@ -20,9 +21,8 @@ private slots:
 
 private:
     void setupGUI();
-    CustomerList *list;
-
-    QTextEdit *txtDisplay;
+    CustomerTableModel *model;
+    QTableView *view;
     QPushButton *btnAddCust;
     QPushButton *btnRead;
     QPushButton *btnWrite;

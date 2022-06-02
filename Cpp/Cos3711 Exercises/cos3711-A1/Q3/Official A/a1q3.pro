@@ -9,15 +9,9 @@ CONFIG -= app_bundle
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        custinput.cpp \
-        customer.cpp \
-        customerlistI.cpp \
-        custview.cpp \
-        filereader.cpp \
-        filewriter.cpp \
-        listreader.cpp \
-        listwriter.cpp \
-        main.cpp
+        cdview.cpp \
+        main.cpp \
+        musicmodel.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -25,11 +19,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    custinput.h \
-    customer.h \
-    customerlistI.h \
-    custview.h \
-    filereader.h \
-    filewriter.h \
-    listreader.h \
-    listwriter.h
+    cdview.h \
+    musicmodel.h

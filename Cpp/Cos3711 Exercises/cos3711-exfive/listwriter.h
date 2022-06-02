@@ -2,16 +2,17 @@
 #define LISTWRITER_H
 
 #include <QString>
-class CustomerList;
+#include "customertablemodel.h"
+//class CustomerTableModel;
 
 class ListWriter
 {
 public:
-    ListWriter(CustomerList *cl);
+    ListWriter(CustomerTableModel *model);
     bool write(QString fileName = "customers.txt");
 
 private:
-    CustomerList *list;
+    CustomerTableModel *ctm;
 };
 
 #endif // LISTWRITER_H

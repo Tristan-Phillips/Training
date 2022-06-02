@@ -2,13 +2,13 @@
 #define LISTREADER_H
 
 #include <QString>
-class CustomerList;
+class Customer;
 
 class ListReader
 {
 public:
     ListReader();
-    CustomerList* read(QString fileName = "customers.txt") const;
+    QList<Customer*> read(QString fileName = "customers.txt") const;
 };
 
 #endif // LISTREADER_H

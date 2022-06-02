@@ -1,23 +1,23 @@
-#ifndef CUSTOMERLIST_H
-#define CUSTOMERLIST_H
+#ifndef CUSTOMERLISTC_H
+#define CUSTOMERLISTC_H
 
 /**************************
  * CustomerList implemented using composition
  *************************/
-
 #include "customer.h"
 
 class CustomerList
 {
 public:
     CustomerList();
-    void append(Customer c);
+    ~CustomerList();
+    void append(Customer *c);
     void clear();
-    QList<Customer> getList() const;
+    QList<Customer*>* getList() const;
     QString toString() const;
 
 private:
-    QList<Customer> list;
+    QList<Customer*> *list;
 };
 
-#endif // CUSTOMERLIST_H
+#endif // CUSTOMERLISTC_H

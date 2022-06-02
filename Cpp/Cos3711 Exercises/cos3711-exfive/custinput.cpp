@@ -90,4 +90,5 @@ void CustInput::setupGUI()
     spnBalance->setMinimum(0.00);
     spnBalance->setDecimals(2);
     spnBalance->setAlignment(Qt::AlignRight);
+    spnBalance->setButtonSymbols(QAbstractSpinBox::NoButtons);
 }

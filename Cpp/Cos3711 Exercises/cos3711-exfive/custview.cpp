@@ -2,18 +2,21 @@
 #include "custinput.h"
 #include "listwriter.h"
 #include "listreader.h"
-#include "customerlistC.h"
-#include <QTextEdit>
+#include "customertablemodel.h"
+#include "comboboxdelegate.h"
+#include "doublespinboxdelegate.h"
+#include <QTableView>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QTextStream>
+//#include <QList>
 
 CustView::CustView(QWidget *parent)
     : QWidget(parent),
-      list(new CustomerList),
-      txtDisplay(new QTextEdit),
+      model(new CustomerTableModel),
+      view(new QTableView),
       btnAddCust(new QPushButton("Add customer")),
       btnRead(new QPushButton("Read")),
       btnWrite(new QPushButton("Write")),
@@ -30,6 +33,7 @@ CustView::CustView(QWidget *parent)
 
     // Set up window
     setWindowTitle("Customers");
+    setMinimumSize(700, 400);
 }
 
 void CustView::addCustomer()
@@ -41,24 +45,28 @@ void CustView::addCustomer()
 
     if (newCust.result() == QDialog::Accepted) {
 
-        list->append(newCust.getCustomer());
-        txtDisplay->append(newCust.getCustomer()->toString());
-        cout << list->toString() << Qt::endl;
+        model->addCustomer(newCust.getCustomer());
     }
     else {
-        cout << "Dialog closed - No data available" << Qt::flush;
+        cout << "Dialog closed - No data available" << Qt::endl;
     }
 }
 
 void CustView::readList()
 {
-    // Clear list before reading from file
-    list->clear();
+    // Create list to hold customer objects
+    QList<Customer*> list;
     ListReader lr;
     list = lr.read();
 
-    txtDisplay->clear();
-    txtDisplay->append(list->toString());
+    // Clear model before adding customers
+    model->clear();
+
+    foreach (Customer* cust, list) {
+        model->addCustomer(cust);
+    }
+
+    view->resizeColumnsToContents();
 
     QTextStream cout(stdout);
     cout << "Customer list read from file" << Qt::endl;
@@ -68,7 +76,7 @@ void CustView::writeList()
 {
     QString prompt("Customer list written to file");
 
-    ListWriter lw(list);
+    ListWriter lw(model);
     if (!lw.write()) {
         prompt = "Error: Customer list not written to file";
     }
@@ -94,12 +102,20 @@ void CustView::setupGUI()
 {
     // Setup layout
     QVBoxLayout *layout(new QVBoxLayout(this));
-    layout->addWidget(txtDisplay);
+    layout->addWidget(view);
     layout->addWidget(btnAddCust);
     layout->addWidget(btnRead);
     layout->addWidget(btnWrite);
     layout->addWidget(btnExit);
 
     // Initialize widgets
-    txtDisplay->setReadOnly(true);
+    view->resizeColumnsToContents();
+    view->setModel(model);
+
+    // Set delegates
+    ComboboxDelegate *cmbDel(new ComboboxDelegate(this));
+    view->setItemDelegateForColumn(5, cmbDel);
+
+    DoubleSpinBoxDelegate *spnDel(new DoubleSpinBoxDelegate(this));
+    view->setItemDelegateForColumn(8, spnDel);
 }
