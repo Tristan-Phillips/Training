@@ -10,9 +10,11 @@ class OClass : public QObject
 {
     Q_OBJECT
 public:
+    //explicit to avoid implicit conversion
     explicit OClass(QObject *parent = nullptr);
 
-    void fill();
+    void fill(); //fill class with data to test
+    //Getter&Setter
     QString get_name() const;
     void set_name(QString value);
     QMap<QString, QString> get_map();

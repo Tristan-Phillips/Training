@@ -17,6 +17,7 @@ class Converter : public QObject
 {
     Q_OBJECT
 public:
+    //Explicit to avoid implicit conversion
     explicit Converter(QObject *parent = nullptr);
 
     static void writeXML(OClass *obj, QString path);
