@@ -1,0 +1,9 @@
+@charset "utf-8";
+header {
+    background-color: rgba(239,150,248,1.00);
+    padding-top: 0px;
+}.container {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
