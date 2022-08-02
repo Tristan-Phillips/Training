@@ -50,7 +50,7 @@ void Worker::readyRead()
     }
 }
 
-void Worker::broadcast()x
+void Worker::broadcast()
 {
     qInfo() << "Broadcasting...";
     timer.start();

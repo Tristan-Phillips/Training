@@ -12,6 +12,18 @@ Client::Client(QObject *parent)
     //Have to use QAbstractSocket
     //Overload -> State change doesnt auto happen
     this->connect(&socket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error), this, &Client::error);
+
+    QNetworkProxy proxy(QNetworkProxy::HttpProxy, "198.59.191.234", 8080);
+    /*Set Authentication
+    proxy.setUser("Username");
+    proxy.setPassword("Password");*/
+
+    /*Per Application
+    QNetworkProxy::setApplicationProxy(proxy);*/
+
+    //Per Socket
+    //This socket and this socket only will use the proxy
+    socket.setProxy(proxy);
 }
 
 void Client::connectToHost(QString host, quint16 port)
@@ -41,9 +53,23 @@ void Client::connected()
 
     //Send data to remote host
     qInfo() << "Sending";
-    socket.write("Hello, World!\r\n");
+    //socket.write("Hello, World!\r\n");
 
+    QByteArray data;
+    data.append("GET /get HTTP/1.1\r\n");
+    //Impersonate Firefox and Windows
+    data.append("User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)\r\n");
+    //Who we are
+    data.append("Host: local\r\n");
+    //When done close
+    data.append("Connection: Close\r\n");
+    //Protocol requires a double hard return line feed
+    //Tells the webserver, that is our request
+    data.append("\r\n");
+    socket.write(data);
+    //data.append() <- If you wanted to post something
 
+    socket.waitForBytesWritten();
 }
 
 void Client::disconnected()
